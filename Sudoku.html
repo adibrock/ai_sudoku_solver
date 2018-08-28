@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=iso-8859-1"/>
+    
+    <!-- you may want to add your own keywords here, for search engine optimization -->
+    <meta name="Keywords" content="INTRODUCTION TO ARTIFICIAL INTELLIGENCE, computer science, the hebrew university of jerusalem, project"/ >
+    <link rel="stylesheet" type="text/css" href="http://www.cs.huji.ac.il/~ai/projects/2012/css/default.css" />      <!-- Don't change this line!-->
+    <title>Sudoku</title>
+</head>
+
+<body>
+<div class="main">
+    <div class="gfx">
+        <a href="http://www.cs.huji.ac.il/~ai/projects/" alt="Introduction to Artificial Intelligence The Hebrew University of Jerusalem"></a>  <!-- Don't change this line!--> 
+    </div>
+    <div class="title">
+        <h1>Sudoku Solver</h1>
+        <h4>Final project by </h4>
+        <h3>
+            <a href="mailto:adi.brock@mail.huji.ac.il" > Adi Brock  </a> &nbsp &nbsp
+            <a href="mailto:maria.tseytlin@mail.huji.ac.il" > Maria Tseytlin  </a> &nbsp &nbsp
+			<a href="mailto:bar.mualem@mail.huji.ac.il" > Bar Mualem  </a> &nbsp &nbsp
+        </h3>     
+    </div>
+   <hr>
+	<center>
+	<img src="SudokuPic.gif" class="centerImage" width="300" >
+	</center>
+    <div class="content">
+    <h2>Introduction</h2>
+    <p>	
+	Sudoku is one of the most well-known puzzles in the world. The standard Sudoku puzzle consists of a nine by nine grid, broken into nine three by three
+	boxes. Each row, column and box must contain all of the numbers one through nine. Each sudoku puzzle starts with a few given values that are used as clues to fill in the rest of the numbers. The amount of numbers given determine the difficulty of the game.
+	In our project we intend to examine combinations of different heuristics for the backtracking algorithm and check which of them yields the best results. We are looking to solve the problem with the least backtracks possible. We will measure on a 9x9 grid in two levels of difficulty and also on a 16x16 grid.
+	Our second goal is to solve the problem using local search algorithms. We will implement random-restart hill-climbing and stochastic beam local search.
+    </p>
+    
+    <h2> Approach and Method </h2>
+    <p>
+	In order to solve the sudoku we chose two different approaches.
+	<br>	
+	The first one - modeling the sudoku as a CSP and using different heuristics to improve the search
+	For solving the problem when defined as a CSP problem, we used the well known backtracking algorithm. 
+	When run without a heuristic, it takes a very long time to solve the puzzle, since the number of states is immense. 
+	Therefore we are going to incorporate a few heuristics which will improve the performance of the algorithm drastically.
+	<br>	
+	There will be heuristics for choosing the next variable, for choosing the value to assign and for detecting early failures. 
+	The two heuristics for failure detecting that we are going to use are forward checking and arc consistency. 
+	We will try 6 different combinations of the mentioned heuristics and check which of them yields the best result. 
+	<br>
+	After that, we will turn to solve the problem using local search. Although local search may not find us a solution, 
+	we will try to examine it and see how close we can get to the solution. First of all, we are going to randomly fill in the 
+	rows with the numbers 1-9, ensuring that all the necessary numbers appear on the board. Then we will basically swap between 
+	two numbers in a row, trying to get a better successor state.
+	To implement the random-restart hill-climbing algorithm, we will find the best successor of the current state each time, 
+	and if we get stuck in a local minimum, we will restart the board and start over.
+	To implement the stochastic beam algorithm, we will first find a number of random states, and improve all of them simultaneously 
+	while using probabilty to decide if we want to take the best successor or make a random move.
+	
+    </p>
+       
+	<h2> Results </h2>
+    <p>
+	In the following charts we show the results we got for running the different combinations of heuristics and strategieson on an 
+	easy 9x9 sudoku, on a hard 9x9 sudoku and on a medium 16x16 sudoku.
+	<br>
+	<br>
+	Abbreviations used for the different heuristics:<br>
+	AC - arc consistency<br>
+	FC - forward checking<br>
+	BO - by order<br>
+	RV - random value<br>
+	MRV - minimum remaining value<br>
+	LCV - least constraining value<br>
+	<br>
+    </p>
+	<p>
+     The results on an easy 9x9 puzzle:
+    <img src="9EasyPuzzle.png" alt="for an easy 9x9 puzzle" width="600" > 
+    <p>
+	 The results on a hard 9x9 puzzle:
+	</p>
+   
+    <img src="9HardPuzzle.png" alt="for an hard 9x9 puzzle" width="620" > 
+    <p>
+     The results on a 16x16 puzzle:
+    </p>
+    <img src="16puzzle.png" alt="for a hard 9x9 puzzle" width="620">
+    
+    <!--
+    ***
+    note that the page width is 620px, so limit your images width to 620!
+    ***
+    -->    
+         
+    <h2>Conclusions</h2>
+    <p>
+    1.  After running our program with different parameters, we concluded that using all the heuristics together 
+	yields the best result. It is of no surprise, as combining forward checking and arc consistency helps us to detect
+	failure much more quickly than using each one separately. 
+	<br>
+	2.  We were surprised to discover that forward checking always performed better than arc consistency, even though arc
+	consistency is supposed to detect failures earlier.
+	<br>
+	3.  In the easy 9x9 and the 16x16 the worst performance was when using arc consistency, by order and random value.
+	<br>
+	4.  The random restart hill climbing algorithm solved the puzzle only once, but mostly got to 2-4 collisions. We gave it 
+	at most 1000 restarts before giving up.
+	<br>
+	5.  The stochastic beam search algorithm worked slightly better for the problem. It managed to solve the problem most of the
+	times, though it took quite a long time. We kept track of 7 different threads in the same state space, thus spreading out over it and
+	increasing our chance of reaching the solution. 	
+    </p>
+	
+    <h2>Additional Information</h2>
+    <p>
+        <ul>
+            <li><a href="Sudoku report.pdf"> Link to the report (English)</a>  </li>
+            <!--
+            If you wrote your report in English, change English or Hebrew to English. i.e, you should have the following line
+            <li><a href="files/report.pdf"> Link to the report (English)</a>
+            -->
+        </ul>
+   </p>
+
+   </div>
+   
+    <!-- *Don't* delete the below code, copyright issues...  -->    
+    <div class="footer">		
+        <span class="right"><a href="http://templates.arcsin.se/">Website template</a> by <a href="http://arcsin.se/">Arcsin</a>   </span>
+   </div>
+</div>
+</body>
+</html>
