@@ -3,4 +3,27 @@ Maria Tseytlin 316984368
 Bar Mualem 305794505
 Adi Brock 321018962
 
-Detailed instructions of how to run the code appear at the end of the report
+Instructions of how to run the code:
+Navigate to the file solve.
+If you would like to use CSP to solve the sudoku, run the command line -
+
+python main.py CSP <sudoku_name> <heuristics_combination>
+
+where sudoku_name is either
+• easy – the easy 9x9 sudoku
+• hard – the hard 9x9 sudoku
+• 16 – the 16x16 sudoku
+
+heuristics_combinations can be
+• 1 - Arc consistency, Forward checking, By order, Random value
+• 2 - Forward checking, By order, Random value
+• 3 - Forward checking, MRV, Least constraining value
+• 4 - Arc consistency, By order, Random value
+• 5 - Arc consistency, MRV, Least constraining value
+• 6 - Arc consistency, Forward checking, MRV, Least constraining value
+
+If you would like to use Local search on the easy 9x9 sudoku, run the command-
+
+For stochastic beam search - Sudoku LCL beam
+
+For random-restart hill climbing - Sudoku LCL RR
